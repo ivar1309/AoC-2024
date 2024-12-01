@@ -11,7 +11,7 @@ import (
 
 type intList []int
 
-func Day1(file string) {
+func PartOne(file string) {
 	var listA intList = make(intList, 0)
 	var listB intList = make(intList, 0)
 

@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	day1.Day1("internal/day1/day1.txt")
+	day1.PartTwo("internal/day1/day1.txt")
 }
