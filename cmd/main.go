@@ -1,9 +1,9 @@
 package main
 
 import (
-	"aoc24/internal/day1"
+	"aoc24/internal/day2"
 )
 
 func main() {
-	day1.PartTwo("internal/day1/day1.txt")
+	day2.PartOne("internal/day2/day2.txt")
 }
