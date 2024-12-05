@@ -9,23 +9,7 @@ import (
 	"strings"
 )
 
-func checkIfAccepted(pages []string, rules map[string][]string) bool {
-	for i, page := range pages {
-		for j, page2 := range pages {
-			if i == j {
-				continue
-			}
-
-			if i > j && slices.Contains(rules[page], page2) {
-				return false
-			}
-		}
-	}
-
-	return true
-}
-
-func PartOne(file string) {
+func PartTwo(file string) {
 	b, err := os.ReadFile(file)
 
 	if err != nil {
@@ -64,7 +48,15 @@ func PartOne(file string) {
 	for idx, update := range updates {
 		numberOfUpdates := len(update)
 
-		if accepted[idx] {
+		if !accepted[idx] {
+			slices.SortFunc(update, func(a, b string) int {
+				if slices.Contains(rules[a], b) {
+					return -1
+				}
+
+				return 1
+			})
+
 			subSum, _ := strconv.ParseInt(update[numberOfUpdates/2], 10, 0)
 			sumOfMiddles += int(subSum)
 		}
