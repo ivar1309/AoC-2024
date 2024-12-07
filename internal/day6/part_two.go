@@ -8,19 +8,24 @@ import (
 	"strings"
 )
 
+var HasLeftTheRoom bool = false
+
 type Guard2 struct {
 	Area      [][]string
 	Direction int
 	X         int
 	Y         int
+	O         int
 }
 
 func (g *Guard2) Move() bool {
 	if g.collides() {
 		g.Direction = (g.Direction + 1) % 4
+		g.Area[g.Y][g.X] = "+"
+	} else {
+		g.Area[g.Y][g.X] = g.getMarker()
 	}
 
-	g.Area[g.Y][g.X] = "X"
 	X, Y := GetMovement(g.Direction)
 	g.X += X
 	g.Y += Y
@@ -44,12 +49,22 @@ func (g *Guard2) hasLeftTheRoom(x, y int) bool {
 	return x < 0 || x == len(g.Area[0]) || y < 0 || y == len(g.Area)
 }
 
+func (g Guard2) getMarker() string {
+	if Movement[g.Direction] == "^" || Movement[g.Direction] == "v" {
+		return "|"
+	}
+
+	return "-"
+}
+
 func (g Guard2) String() string {
 	output := ""
 
 	for _, row := range g.Area {
 		output += strings.Join(row, "") + "\n"
 	}
+
+	output += fmt.Sprintf("\nObstacles: %v\n", g.O)
 
 	return output
 }
@@ -77,6 +92,7 @@ func PartTwo(file string) {
 					Direction: slices.Index(Movement, col),
 					X:         x,
 					Y:         y,
+					O:         0,
 				}
 			}
 		}
