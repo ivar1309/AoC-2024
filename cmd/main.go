@@ -1,7 +1,7 @@
 package main
 
-import "aoc24/internal/day7"
+import "aoc24/internal/day9"
 
 func main() {
-	day7.PartTwo("internal/day7/day7.txt")
+	day9.PartOne("internal/day9/day9.txt")
 }
