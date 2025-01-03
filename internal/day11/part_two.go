@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var memoize map[string][]Stone = make(map[string][]Stone)
+
 func PartTwo(file string) {
 	b, err := os.ReadFile(file)
 
